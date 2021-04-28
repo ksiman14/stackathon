@@ -30,7 +30,7 @@ export class Home extends Component {
     animate();
   }
   render() {
-    return <div />;
+    return <div ref={(ref) => (this.mount = ref)} />;
   }
 }
 
