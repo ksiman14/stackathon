@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import * as THREE from '../js/three';
+import * as THREE from 'three';
 
 /**
  * COMPONENT
