@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import Home from './components/Home';
+import Line from './components/Line';
 
 /**
  * COMPONENT
@@ -10,9 +11,8 @@ class Routes extends Component {
     return (
       <div>
         <Switch>
-          <Route path="/" exact component={Home} />
+          <Route exact path="/" component={Home} />
           <Route path="/home" component={Home} />
-          <Redirect to="/home" />
         </Switch>
       </div>
     );

@@ -29,7 +29,7 @@
     "morgan": "^1.9.1",
     "pg": "^8.5.1",
     "sequelize": "^6.3.5",
-    "three": "^0.128.0"
+    "victory": "^35.5.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",
