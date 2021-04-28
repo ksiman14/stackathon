@@ -6,16 +6,8 @@ a {
   text-decoration: none;
 }
 
-label {
+canvas {
   display: block;
-}
-
-nav a {
-  display: inline-block;
-  margin: 1em;
-}
-
-form div {
-  margin: 1em;
-  display: inline-block;
+  width: 100%;
+  height: 100%;
 }
