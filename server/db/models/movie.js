@@ -9,9 +9,9 @@ const Movie = db.define('movie', {
       notEmpty: true,
     },
   },
-  popularity: {
-    type: Sequelize.FLOAT,
-  },
+  popularity: Sequelize.FLOAT,
+  vote_average: Sequelize.FLOAT,
+  poster_path: Sequelize.TEXT,
 });
 
 module.exports = Movie;

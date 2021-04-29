@@ -1,21 +1,28 @@
 'use strict';
 const axios = require('axios');
 const movieData = require('./raw_data/movie_ids');
+const chars = /^[a-zA-Z0-9- :;]*$/;
+const regex = new RegExp(chars);
 
 const {
   db,
   models: { User, Movie, Genre },
 } = require('../server/db');
 
-const movies = movieData.filter(
-  (movie) => !movie.adult && movie.popularity > 3
+const seedMovies = movieData.filter(
+  (movie) =>
+    !movie.adult && movie.popularity > 50 && regex.test(movie.original_title)
 );
 
 async function seed() {
   await db.sync({ force: true });
 
-  // clears db and matches models to tables
   console.log('db synced!');
+
+  const users = await Promise.all([
+    User.create({ username: 'cody', password: '123' }),
+    User.create({ username: 'murphy', password: '123' }),
+  ]);
 
   const { data: genreData } = await axios.get(
     'https://api.themoviedb.org/3/genre/movie/list?api_key=b1e7617c6bf37a866b82743818909879&language=en-US'
@@ -23,17 +30,24 @@ async function seed() {
   const genres = await Promise.all(
     genreData.genres.map((genre) => Genre.create(genre))
   );
-  // Creating Users
-  const users = await Promise.all([
-    User.create({ username: 'cody', password: '123' }),
-    User.create({ username: 'murphy', password: '123' }),
-  ]);
 
-  const movieRows = await Promise.all(
-    movies.map((movie) => Movie.create(movie))
+  const movies = await Promise.all(
+    seedMovies.map((movie) => Movie.create(movie))
   );
 
-  console.log(`seeded ${users.length} users`);
+  await Promise.all(
+    movies.map(async (movie) => {
+      const current = await Movie.findByPk(movie.id);
+      const { data } = await axios.get(
+        `https://api.themoviedb.org/3/movie/${movie.id}?api_key=b1e7617c6bf37a866b82743818909879&language=en-US`
+      );
+      data.genres.forEach((genre) => {
+        current.addGenre(genre.id);
+      });
+      await current.update(data);
+    })
+  );
+
   console.log(`seeded successfully`);
   return {
     users: {
