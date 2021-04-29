@@ -2,12 +2,16 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Navbar = () => (
-  <div>
-    <h1>Stackathon</h1>
+  <div id="nav">
+    <h1>Movie Browser</h1>
     <nav>
-      <div>
-        <p>
-          This site uses data from the
+      <div id="nav_right">
+        <div id="nav_links">
+          <Link to="/home">Home</Link>
+          <Link to="/movies">All Titles</Link>
+        </div>
+        <p id="source">
+          *This site uses data from the
           <Link
             to={{ pathname: 'https://developers.themoviedb.org/3' }}
             target="_blank"
@@ -16,10 +20,8 @@ const Navbar = () => (
             TMDB Api
           </Link>
         </p>
-        <Link to="/home">Home</Link>
       </div>
     </nav>
-    <hr />
   </div>
 );
 

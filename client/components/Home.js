@@ -12,7 +12,7 @@ export class Home extends Component {
     const popMovies = this.props.popularMovies || [];
     return (
       <div>
-        <h3>Most Popular Movies</h3>
+        <h3>Today's Most Popular Movies</h3>
         <div id="most_popular">
           {popMovies.map((movie) => (
             <div key={movie.id}>
