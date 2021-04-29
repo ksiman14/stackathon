@@ -5,3 +5,12 @@ body {
 a {
   text-decoration: none;
 }
+
+h3 {
+  text-align: center;
+}
+
+#most_popular {
+  display: flex;
+  justify-content: space-around;
+}

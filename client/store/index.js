@@ -3,7 +3,7 @@ import { createLogger } from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import auth from './auth';
-import movies from './movies';
+import movies from './allMovies';
 import popularMovies from './popularMovies';
 
 const reducer = combineReducers({ auth, movies, popularMovies });
