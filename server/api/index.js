@@ -1,6 +1,8 @@
 const router = require('express').Router();
 module.exports = router;
 
+router.use('/genres', require('./genres'));
+
 router.use('/movies', require('./movies'));
 
 router.use('/users', require('./users'));

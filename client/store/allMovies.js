@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const SET_MOVIES = 'GET_MOVIES';
+const SET_MOVIES = 'SET_MOVIES';
 
 const setMovies = (movies) => ({
   type: SET_MOVIES,
@@ -11,6 +11,17 @@ export const fetchMovies = () => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get('/api/movies');
+      dispatch(setMovies(data));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const fetchGenreMovies = (name) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(`/api/movies/${name}`);
       dispatch(setMovies(data));
     } catch (err) {
       console.log(err);

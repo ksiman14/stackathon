@@ -4,9 +4,10 @@ import thunkMiddleware from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import auth from './auth';
 import movies from './allMovies';
+import genres from './allGenres';
 import popularMovies from './popularMovies';
 
-const reducer = combineReducers({ auth, movies, popularMovies });
+const reducer = combineReducers({ auth, movies, genres, popularMovies });
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
 );

@@ -14,23 +14,30 @@ export class Home extends Component {
     const popMovies = this.props.popularMovies || [];
     return (
       <div>
-        <div>
-          <h3>Today's Most Popular Movies</h3>
-          <div id="most_popular">
-            {popMovies.map((movie) => (
-              <div key={movie.id}>
-                <Link to={`/movies/${movie.id}`}>
-                  <img
-                    src={'https://image.tmdb.org/t/p/w200' + movie.poster_path}
-                  />
-                </Link>
-              </div>
-            ))}
+        <div className="row_container">
+          <div className="row_box">
+            <h3>Today's Most Popular Movies</h3>
+            <div id="most_popular">
+              {popMovies.map((movie) => (
+                <div key={movie.id} className="single_movie">
+                  <Link to={`/movies/${movie.id}`}>
+                    <img
+                      src={
+                        'https://image.tmdb.org/t/p/w200' + movie.poster_path
+                      }
+                    />
+                  </Link>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="row_box">
+            <h3>Movie Roulette</h3>
           </div>
         </div>
-        <div id="chart_container">
-          <GenrePie component={GenrePie} />
-          <GenreScatter component={GenreScatter} />
+        <div className="row_container">
+          <GenrePie className="row_box" component={GenrePie} />
+          <GenreScatter className="row_box" component={GenreScatter} />
         </div>
       </div>
     );

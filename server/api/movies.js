@@ -1,8 +1,7 @@
 const router = require('express').Router();
-const Sequelize = require('sequelize');
 const {
   db,
-  models: { Movie },
+  models: { Movie, Genre },
 } = require('../db');
 
 // api/movies
@@ -22,6 +21,25 @@ router.get('/popular', async (req, res, next) => {
       'SELECT * FROM MOVIES ORDER BY POPULARITY DESC LIMIT 5',
       {
         model: Movie,
+      }
+    );
+    res.json(movies);
+  } catch (err) {
+    next(err);
+  }
+});
+
+// api/movies/:genre
+router.get('/:genre', async (req, res, next) => {
+  try {
+    const movies = await Movie.findAll(
+      {
+        include: [{ model: Genre }],
+      },
+      {
+        where: {
+          name: req.params.genre,
+        },
       }
     );
     res.json(movies);
