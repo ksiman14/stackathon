@@ -1,9 +1,10 @@
 'use strict';
+const axios = require('axios');
 const movieData = require('./raw_data/movie_ids');
 
 const {
   db,
-  models: { User, Movie },
+  models: { User, Movie, Genre },
 } = require('../server/db');
 
 const movies = movieData.filter(
@@ -16,6 +17,12 @@ async function seed() {
   // clears db and matches models to tables
   console.log('db synced!');
 
+  const { data: genreData } = await axios.get(
+    'https://api.themoviedb.org/3/genre/movie/list?api_key=b1e7617c6bf37a866b82743818909879&language=en-US'
+  );
+  const genres = await Promise.all(
+    genreData.genres.map((genre) => Genre.create(genre))
+  );
   // Creating Users
   const users = await Promise.all([
     User.create({ username: 'cody', password: '123' }),
