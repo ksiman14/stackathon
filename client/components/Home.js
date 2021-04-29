@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchPopMovies } from '../store/popularMovies';
+import GenrePie from './GenrePie';
+import GenreScatter from './GenreScatter';
 
 export class Home extends Component {
   componentDidMount() {
@@ -12,17 +14,23 @@ export class Home extends Component {
     const popMovies = this.props.popularMovies || [];
     return (
       <div>
-        <h3>Today's Most Popular Movies</h3>
-        <div id="most_popular">
-          {popMovies.map((movie) => (
-            <div key={movie.id}>
-              <Link to={`/movies/${movie.id}`}>
-                <img
-                  src={'https://image.tmdb.org/t/p/w200' + movie.poster_path}
-                />
-              </Link>
-            </div>
-          ))}
+        <div>
+          <h3>Today's Most Popular Movies</h3>
+          <div id="most_popular">
+            {popMovies.map((movie) => (
+              <div key={movie.id}>
+                <Link to={`/movies/${movie.id}`}>
+                  <img
+                    src={'https://image.tmdb.org/t/p/w200' + movie.poster_path}
+                  />
+                </Link>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div id="chart_container">
+          <GenrePie component={GenrePie} />
+          <GenreScatter component={GenreScatter} />
         </div>
       </div>
     );

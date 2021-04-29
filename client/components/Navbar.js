@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Navbar = () => (
   <div id="nav">
-    <h1>Movie Browser</h1>
+    <h1>Movie Dashboard</h1>
     <nav>
       <div id="nav_right">
         <div id="nav_links">

@@ -62,3 +62,8 @@ h3 {
 #most_popular img {
   border: solid 2px white;
 }
+
+#chart_container {
+  display: flex;
+  justify-content: space-between;
+}
